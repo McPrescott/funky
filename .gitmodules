@@ -1,0 +1,3 @@
+[submodule "lib/precept"]
+	path = lib/precept
+	url = /jmcp/dev/precept/.git
