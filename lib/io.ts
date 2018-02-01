@@ -1,9 +1,9 @@
-import {Functor, Monad, MonadicFn, Map} from './types/index';
-import compose from './helpers/compose';
+import {Functor, Monad, MonadicFn, Map} from '../types';
+import compose from '../helpers/util/compose';
+import hold from '../helpers/util/hold';
 
-const hold = x => () => x;
 
-export class IO implements Functor, Monad {
+export default class IO implements Functor, Monad {
   effect: Function;
 
   static of(x: any){
