@@ -1,5 +1,7 @@
 import {Functor, Monad, MonadicFn, Map} from './types/index';
-import {compose, hold} from './precept/lib/util';
+import compose from './helpers/compose';
+
+const hold = x => () => x;
 
 export class IO implements Functor, Monad {
   effect: Function;

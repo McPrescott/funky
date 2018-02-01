@@ -1,5 +1,6 @@
 import {Functor, Map} from './types/index';
-import {compose, curry, emptyFunction} from './precept/lib/util';
+import compose from './helpers/compose';
+import curry from './helpers/curry';
 
 
 export class Torrent {
@@ -35,6 +36,6 @@ export class Torrent {
   // *** Impurity *** ----------------------------------------------------------
 
   unleash(): void {
-    this.emitter(emptyFunction);
+    this.emitter(function(){});
   }
 }

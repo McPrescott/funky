@@ -3,7 +3,8 @@
  */
 
 import {Functor, Map, NodeAsync, NodeCallback} from './types/index';
-import {compose, defer} from './precept/lib/util';
+import compose from './helpers/compose';
+import defer from './helpers/defer';
 
 export class Async implements Functor {
   private operation: NodeAsync;

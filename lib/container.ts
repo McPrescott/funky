@@ -1,5 +1,5 @@
 import {Functor, Monad, Applicative, MonadicFn, Map} from './types/index';
-import {compose} from './precept/lib/util';
+import compose from './helpers/compose';
 
 export default class Container implements Functor, Monad, Applicative {
   private __value: any;
