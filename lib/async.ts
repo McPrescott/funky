@@ -2,9 +2,9 @@
  * Node-Style asynchronus task functor.
  */
 
-import {Functor, Map, NodeAsync, NodeCallback} from './types/index';
-import compose from './helpers/compose';
-import defer from './helpers/defer';
+import {Functor, Map, NodeAsync, NodeCallback} from '../types';
+import compose from '../helpers/util/compose';
+import defer from '../helpers/util/defer';
 
 export class Async implements Functor {
   private operation: NodeAsync;

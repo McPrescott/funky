@@ -1,6 +1,6 @@
-import {Functor, Map} from './types/index';
-import compose from './helpers/compose';
-import curry from './helpers/curry';
+import {Functor, Map} from '../types';
+import compose from '../helpers/util/compose';
+import curry from '../helpers/util/curry';
 
 
 export class Torrent {

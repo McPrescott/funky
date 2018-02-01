@@ -1,5 +1,5 @@
-import {Functor, Monad, Applicative, MonadicFn, Map} from './types/index';
-import compose from './helpers/compose';
+import {Functor, Monad, Applicative, MonadicFn, Map} from '../types';
+import compose from '../helpers/util/compose';
 
 export default class Container implements Functor, Monad, Applicative {
   private __value: any;
