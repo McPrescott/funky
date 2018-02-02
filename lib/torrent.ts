@@ -3,7 +3,7 @@ import compose from '../helpers/util/compose';
 import curry from '../helpers/util/curry';
 
 
-export class Torrent {
+export default class Torrent {
   private emitter: Function;
 
   static fromEvent(event: string, element: Window|Element|string|void){

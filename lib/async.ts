@@ -6,7 +6,7 @@ import {Functor, Map, NodeAsync, NodeCallback} from '../types';
 import compose from '../helpers/util/compose';
 import defer from '../helpers/util/defer';
 
-export class Async implements Functor {
+export default class Async implements Functor {
   private operation: NodeAsync;
   public __value: any;
 
@@ -16,6 +16,10 @@ export class Async implements Functor {
 
   static of(x: any){
     return new Async(defer(undefined, x));
+  }
+
+  static from(op: NodeAsync){
+    return new Async(op);
   }
 
   map(map: Map){

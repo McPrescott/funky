@@ -1,4 +1,4 @@
-import {Async} from '../../lib/async';
+import Async from '../../lib/async';
 import {readFile} from 'fs';
 
 // <> readFile:: string -> Async string
