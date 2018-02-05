@@ -1,14 +1,14 @@
 import curry from '../util/curry';
 
-// <> pushTo :: array -> a => a
+// <> pushTo :: [] -> a => a
 //                           
-export const pushTo = curry((array: any[], x: any) => {
-  array.push(x);
-  return x;
+export const pushTo = curry((array: any[], ...x: any[]) => {
+  array.push(...x);
+  return (x.length === 1)? x[0]: x;
 })
 
 
-// <> push :: a -> array => a
+// <> push :: a -> [] => a
 //                           
 export const push = curry((x: any, array: any[]) => {
   array.push(x);
