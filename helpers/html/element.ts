@@ -7,6 +7,8 @@ interface ElementProps {
   className?: string,
   innerText?: string,
   type?: string,
+  nodeValue?: string,
+  value?: string,
 };
 
 // <> element :: (string, ElementProps?) => HTMLElement

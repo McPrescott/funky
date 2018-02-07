@@ -6,12 +6,14 @@ import curry from '../helpers/util/curry';
 export default class Torrent {
   private emitter: Function;
 
-  static fromEvent(event: string, element: Window|Element|string|void){
+  static fromEvent(event: string, element: Window|Element|string){
     return new Torrent((callback: EventListener) => {
-      element = (typeof element === 'string')? document.querySelector(element):
-        (element instanceof HTMLElement)?      element:
-        /* Otherwise */                        window;
-      element.addEventListener(event, callback);
+      element = 
+        (element instanceof HTMLElement)? element:
+        (typeof element === 'string')?    document.querySelector(element):
+        /* Otherwise */                   window;
+      
+        element.addEventListener(event, callback);
     }) 
   }
 
