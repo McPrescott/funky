@@ -77,6 +77,12 @@ export default class IO implements Functor, Monad {
     ), 'FlatMapped IOs');
   }
 
+  // <> flatmap :: alias for flatMap
+  //                                
+  flatmap(fn: MonadicFn) {
+    return this.flatMap(fn);
+  }
+
   //# Flatmap: Take IO and map a function that returns and IO
   //# IO.performUnsafeOperation returns a value `a`
   //# IO IO a.effect() -> IO b.effect() => IO c
