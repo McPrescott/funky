@@ -36,11 +36,11 @@ export default class IO implements Functor, Monad {
   //                           
   constructor(effect: Function, name?: string){
     this.effect = effect;
-    if (debug){               //! debug
-      this.id = inc++;
-      this.name = name || effect.name;
-      console.log(`IO: ${this.id} created with name ${this.name}`); //! debug
-    }
+    // if (debug){               //! debug
+    //   this.id = inc++;
+    //   this.name = name || effect.name;
+    //   console.log(`IO: ${this.id} created with name ${this.name}`); //! debug
+    // }
   }
 
 
@@ -69,7 +69,7 @@ export default class IO implements Functor, Monad {
       return io.performUnsafeOperation.bind(io).call();
     };
 
-    console.log(`Flat Maping ${this.id}`); //! debug
+    // console.log(`Flat Maping ${this.id}`); //! debug
     
     return IO.from(compose(
       thisOperation,
@@ -113,7 +113,7 @@ export default class IO implements Functor, Monad {
   //                                  
   performUnsafeOperation(){
     //! debug 
-    console.log(`Calling Unsafe Operation on: ${this.id}.${this.name || ""}`);
+    // console.log(`Calling Unsafe Operation on: ${this.id}.${this.name || ""}`);
     return this.effect();
   }
 }

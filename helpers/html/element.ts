@@ -9,6 +9,7 @@ interface ElementProps {
   type?: string,
   nodeValue?: string,
   value?: string,
+  size?: number
 };
 
 // <> element :: (string, ElementProps?) => HTMLElement

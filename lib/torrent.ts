@@ -1,6 +1,7 @@
 import {Functor, Map} from '../types';
 import compose from '../helpers/util/compose';
 import curry from '../helpers/util/curry';
+import empty from '../helpers/util/empty';
 
 
 export default class Torrent {
@@ -37,7 +38,12 @@ export default class Torrent {
 
   // *** Impurity *** ----------------------------------------------------------
 
-  unleash(): void {
-    this.emitter(function(){});
+  // <> unleash :: @Torrent a -> ...Map? -> void
+  //                                            
+  unleash(...fns: Map[]): void {
+    ((fns.length === 0)
+      ? this
+      : this.polyMap(...fns)
+    ).emitter(empty);
   }
 }
