@@ -4,12 +4,25 @@ import assure from "../array/assure";
 
 
 // [Listener: EventListener | EventListenerObject]
-// <> listen :: string -> Listener -> Element => Element
-//                                                      
-export default curry((types: string|string[], handler: EventListener|EventListenerObject, element: Element) => 
-  IO.from(() => ( 
-    types = assure(types),
-    types.forEach(type => element.addEventListener(type, handler)),
-    element
-  ))
+// [Type]: string | {event: string, key: string}
+// <> listen :: Type | Type[] -> Listener -> Element => Element
+//                                                             
+export default curry((types, handler, element) => 
+  IO.from(() => {
+    types = assure(types);
+    
+    types.forEach(type => {
+      if (typeof type === 'string') {
+        element.addEventListener(type, handler)
+      } else {
+        element.addEventListener(type.event, event => {
+          if (type.key === event.key) {
+            handler(event);
+          }
+        })
+      }
+    });
+    
+    return element
+  })
 );
