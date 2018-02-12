@@ -20,7 +20,7 @@ export default class Container implements Functor, Monad, Applicative {
     return Container.of(compose(...fns)(this.__value))
   }
 
-  flatMap(fn: MonadicFn){
+  flatmap(fn: MonadicFn){
     return fn(this.__value);
   }
 
