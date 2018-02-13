@@ -5,8 +5,8 @@ import assure from "../array/assure";
 
 // [Listener: EventListener | EventListenerObject]
 // [Type]: string | {event: string, key: string}
-// <> listen :: Type | Type[] -> Listener -> Element => Element
-//                                                             
+// <> listen :: Type | Type[] -> Listener -> Element => IO Element
+//                                                                
 export default curry((types, handler, element) => 
   IO.from(() => {
     types = assure(types);
