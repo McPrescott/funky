@@ -3,11 +3,13 @@ import compose from '../helpers/util/compose';
 import curry from '../helpers/util/curry';
 import empty from '../helpers/util/empty';
 
+interface Emitter {(callback: EventListener): void} 
+
 
 export default class Torrent {
   private emitter: Function;
 
-  static fromEvent(event: string, element: Window|Element|string){
+  static fromEvent(event: string, element: Window|Element|string) {
     return new Torrent((callback: EventListener) => {
       element = 
         (element instanceof HTMLElement)? element:
@@ -18,13 +20,18 @@ export default class Torrent {
     }) 
   }
 
-  constructor(emitter: Function){
+  static from(emitter: Emitter) {
+    return new Torrent(emitter);
+  }
+
+  constructor(emitter: Emitter) {
     this.emitter = emitter
   }
 
   map(fn: Map) {
     return new Torrent((callback: Function) => 
-      this.emitter(compose(fn, callback)));
+      this.emitter(compose(fn, callback))
+    );
   }
 
   polyMap(...fns: Map[]){
@@ -33,7 +40,11 @@ export default class Torrent {
 
   from(arg) {
     return new Torrent(callback => this.emitter(
-      compose(input => input? arg: input, callback)))
+      compose(
+        input => (input)? arg: input, 
+        callback
+      )
+    ));
   }
 
   // *** Impurity *** ----------------------------------------------------------
