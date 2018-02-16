@@ -26,3 +26,9 @@ interface ElementSpec {
   classes?: string|string[],
   attrs?: [string, string] | [string, string][]
 }
+
+interface ElementSpecTest {
+  id: Predicate,
+  classes: Predicate,
+  attrs: Predicate
+}

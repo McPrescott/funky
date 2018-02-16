@@ -1,3 +1,5 @@
+/// <reference path='../types/general.d.ts' />
+
 import {Functor, Map} from '../types';
 import compose from '../helpers/util/compose';
 import curry from '../helpers/util/curry';
@@ -28,6 +30,7 @@ export default class Torrent {
     this.emitter = emitter
   }
 
+
   map(fn: Map) {
     return new Torrent((callback: Function) => 
       this.emitter(compose(fn, callback))
@@ -45,6 +48,12 @@ export default class Torrent {
         callback
       )
     ));
+  };
+
+  filter(...tests: Predicate[]) {
+    return Torrent.from((callback) => this.emitter((value) => {
+      if (tests.every(test => test(value))) callback(value);
+    }));
   }
 
   // *** Impurity *** ----------------------------------------------------------
