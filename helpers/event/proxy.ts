@@ -16,6 +16,7 @@ export default curry(
     return Torrent.from((callback) => 
       on(eventSpecs, callback, parent).performUnsafeOperation()
     ) .filter (
+      validate.tag,
       validate.id, 
       validate.classes, 
       validate.attributes
@@ -23,9 +24,16 @@ export default curry(
   }
 );
 
+let e = (e: Element) => e.tagName;
+
 // ⨍.validator :: ElementSpec => ElementSpecTest
 //                                              
-const validator = ({id, classes, attrs}: ElementSpec) => ({
+const validator = ({tag, id, classes, attrs}: ElementSpec) => ({
+  tag({target}) {
+    let b = tag === undefined || tag.toUpperCase() === target.tagName;
+    console.log(tag, b);
+    return b;
+  },
   id({target}) {
     return id === undefined || id === target.id;
   },
@@ -35,7 +43,13 @@ const validator = ({id, classes, attrs}: ElementSpec) => ({
     );
   },
   attributes({target}) {
-    return attrs === undefined || array(attrs).every(([attr, value]) => 
+    if (attrs === undefined) return true;
+
+    attrs = (attrs[0] instanceof Array)
+      ? attrs
+      : <any> [attrs];
+
+    return (<any> attrs).every(([attr, value]) => 
       target.getAttribute(attr) === value
     );
   }

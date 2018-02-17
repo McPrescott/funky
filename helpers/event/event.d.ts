@@ -8,6 +8,10 @@ declare enum MouseButtons {
   'fifth' = 4,
 }
 
+
+//*** I like this better ***
+//# let spec = ['keypress', {key: 'enter'}];
+
 interface MouseEventSpec {
   type: Events;
   button: MouseButtons;
@@ -22,6 +26,7 @@ declare type EventSpec = string | KeyEventSpec;
 declare type EventSpecs = EventSpec | EventSpec[];
 
 interface ElementSpec {
+  tag?: string,
   id?: string,
   classes?: string|string[],
   attrs?: [string, string] | [string, string][]
