@@ -1,7 +1,3 @@
-type Parital<Obj> = {
-  [Prop in keyof Obj]?: Obj[Prop];
-}
-
 declare type AnyPartialEvent =  
   | PartialDragEvent
   | PartialErrorEvent 
@@ -18,5 +14,3 @@ declare type PartialFocusEvent = Partial<FocusEvent>;
 declare type PartialKeyboardEvent = Partial<KeyboardEvent>;
 declare type PartialMouseEvent = Partial<MouseEvent>;
 declare type PartialUIEvent = Partial<UIEvent>;
-
-

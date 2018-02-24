@@ -1,5 +1,5 @@
 /// <reference path='./events.d.ts'/>
-/// <reference path='./event-assertions.d.ts' />
+/// <reference path='./event-partials.d.ts' />
 
 declare type AnyEventSpec =
   | EventSpec
@@ -12,41 +12,49 @@ declare type AnyEventSpec =
 
 declare abstract class Spec {
   on: AnyEvent;
-  assert?: AnyEventAssertion;
+  assert?: AnyPartialEvent;
+  exclude?: AnyPartialEvent;
   opts?: boolean | AddEventListenerOptions;
 }
 
 interface EventSpec extends Spec {
   on: Events;
-  assert?: EventAssertion;
+  assert?: PartialEvent;
+  exclude?: PartialEvent;
 }
 
 interface DragEventSpec extends Spec {
   on: DragEvents;
-  assert?: DragEventAssertion;
+  assert?: PartialDragEvent;
+  exclude?: PartialDragEvent;
 }
 
 interface ErrorEventSpec extends Spec {
   on: ErrorEvents;
-  assert?: ErrorEventAssertion;
+  assert?: PartialErrorEvent;
+  exclude?: PartialErrorEvent;
 }
 
 interface FocusEventSpec extends Spec {
   on: FocusEvents;
-  assert?: FocusEventAssertion;
+  assert?: PartialFocusEvent;
+  exclude?: PartialFocusEvent;
 }
 
 interface KeyboardEventSpec extends Spec {
   on: KeyboardEvents;
-  assert?: KeyboardEventAssertion;
+  assert?: PartialKeyboardEvent;
+  exclude?: PartialKeyboardEvent;
 }
 
 interface MouseEventSpec extends Spec {
   on: MouseEvents;
-  assert?: MouseEventAssertion;
+  assert?: PartialMouseEvent;
+  exclude?: PartialMouseEvent;
 }
 
 interface UIEventSpec extends Spec {
   on: UIEvents;
-  assert?: UIEventAssertion;
+  assert?: PartialUIEvent;
+  exclude?: PartialUIEvent;
 }

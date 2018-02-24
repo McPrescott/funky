@@ -1,71 +1,56 @@
-/// <reference path='./event.d.ts' />
+/// <reference path='types/element-spec.d.ts' />
 
 import array from "../array/assure";
 
 
-// ⨍.validator :: ElementSpec => ElementSpecTest
-//                                              
-export default class {
-  private spec: ElementSpec;
-
-  static of (spec: ElementSpec) {
-    return new this(spec);
-  }
-
-  constructor(spec: ElementSpec) {
-    this.spec = spec;
-  }
+// ⨍.tagName :: ElementSpec -> Element => boolean
+//------------------------------------------------
+const tagName = (spec: ElementSpec, target: Element) => {
+  const {tagName} = spec;
+  return (tagName === undefined || tagName.toUpperCase() === target.tagName);
+}
 
 
-  // μ.tag :: @-string -> Element => boolean
-  //                                        
-  tag (target) {
-    const {tag} = this.spec;
-    return tag === undefined || tag.toUpperCase() === target.tagName;
-  }
+// ⨍.id :: ElementSpec -> Element => boolean
+//-------------------------------------------
+const id = (spec: ElementSpec, target: Element) => {
+  const {id} = spec;
+  return id === undefined || id === target.id;
+}
 
 
-  // μ.id :: @-string -> Element => boolean
-  //
-  id (target) {
-    const {id} = this.spec;
-    return id === undefined || id === target.id;
-  }
+// ⨍.classes :: ElementSpec -> Element => boolean
+//------------------------------------------------
+const classes = (spec: ElementSpec, target: Element) => {
+  const {classes} = spec;
+  return classes === undefined || array(classes).every(clazz => 
+    target.className.includes(clazz)
+  );
+}
 
 
-  // μ.classes :: @-string -> Element => boolean
-  //                                            
-  classes (target) {
-    const {classes} = this.spec;
-    return classes === undefined || array(classes).every(clazz => 
-      target.className.includes(clazz)
-    );
-  }
+// ⨍.attributes :: ElementSpec -> Element => boolean
+//---------------------------------------------------
+const attributes = (spec: ElementSpec, target: Element) =>  {
+  let {attrs} = spec;
+
+  if (attrs === undefined) return true;
+
+  attrs = (typeof attrs[0] !== 'string')
+    ? attrs
+    : [attrs] as bi<string>[];
+
+  return (attrs as bi<string>[]).every(([attr, value]) => 
+    target.getAttribute(attr) === value
+  );
+}
 
 
-  // μ.attributes :: @-string -> Element => boolean
-  //                                               
-  attributes (target) {
-    let {attrs} = this.spec;
-
-    if (attrs === undefined) return true;
-
-    attrs = (attrs[0] instanceof Array)
-      ? attrs
-      : <any> [attrs];
-
-    return (<any> attrs).every(([attr, value]) => 
-      target.getAttribute(attr) === value
-    );
-  }
-
-
-  // μ.all :: @-Object -> Element => boolean
-  //                                          
-  all (target) {
-    return this.tag(target) 
-      && this.id(target) 
-      && this.classes(target) 
-      && this.attributes(target);
-  }
+// ⨍.validate :: ElementSpec -> Element => boolean
+//-------------------------------------------------
+export default (spec: ElementSpec) => (target: Element) => {
+  return tagName(spec, target) 
+    && id(spec, target) 
+    && classes(spec, target) 
+    && attributes(spec, target);
 }

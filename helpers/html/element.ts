@@ -3,13 +3,13 @@ import assign from '../object/assign';
 
 
 interface ElementProps {
-  id?: string,
-  className?: string,
-  innerText?: string,
-  type?: string,
-  nodeValue?: string,
-  value?: string,
-  size?: number
+  id?: string;
+  className?: string;
+  innerText?: string;
+  type?: string;
+  nodeValue?: string;
+  value?: string;
+  size?: number | string;
 };
 
 // <> element :: (string, ElementProps?) => HTMLElement
